@@ -5,6 +5,7 @@ import pandas as pd
 #import os
 import numpy as np
 from dash.dependencies import Output, Input
+import plotly.express as px
 
 data = pd.DataFrame()
 #for i in os.listdir():
@@ -169,23 +170,31 @@ def updateCharts(company, start_date, end_date):
         },
     }
     
-    histogramChartFigure = {
-        "data": [
-            {
-                "x": filteredData["close"],
-                "type": "histogram",
-            },
-        ],
-        "layout": {
-            "title": {
-                "text": "Distribution of Close Price",
-                "x": 0.05,
-                "xanchor": "left",
-            },
-            "xaxis": {"fixedrange": True},
-            "colorway": ["#2CA02C"], #https://plotly.com/python/discrete-color/
-        },
-    }
+    #histogramChartFigure = {
+    #    "data": [
+    #        {
+    #            "x": filteredData["close"],
+    #            "type": "histogram",
+    #        },
+    #    ],
+    #    "layout": {
+    #        "title": {
+    #            "text": "Distribution of Close Price",
+    #            "x": 0.05,
+    #            "xanchor": "left",
+    #        },
+    #        "xaxis": {"fixedrange": True},
+    #        "colorway": ["#2CA02C"],
+    #    },
+    #}
+    
+    histogramChartFigure = px.histogram(filteredData["close"])
+    histogramChartFigure.update_layout(
+        title_text="Distribution of Close Price",
+        xaxis_title_text="Close",
+        yaxis_title_text="Count",
+        bargap=0.2
+    )
 
     return closeChartFigure, normalisedChartFigure, histogramChartFigure
      
