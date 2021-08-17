@@ -42,7 +42,7 @@ app.layout = html.Div(
                     className="header-title",
                 ),
                 html.P(
-                    children = "Analyse stock data for Singtel"
+                    children = "Analyse selected stock data"
                     " taken from Yahoo",
                     className = "header-description",
                 ),
