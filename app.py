@@ -2,16 +2,21 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
-import os
+#import os
 import numpy as np
 from dash.dependencies import Output, Input
 
 data = pd.DataFrame()
-for i in os.listdir():
-    if '_stock_yahoo.csv' in i:
-        df = pd.read_csv(i)
-        df['company'] = i[:-16]
-        data = pd.concat([data, df], axis = 0)
+#for i in os.listdir():
+#    if '_stock_yahoo.csv' in i:
+#        df = pd.read_csv(i)
+#        df['company'] = i[:-16]
+#        data = pd.concat([data, df], axis = 0)
+#data = data.reset_index(drop = True)
+companies = ['amazon', 'singtel', 'starhub', 'keppel', 'singaporeiarlines', 'genting', 'comfortdelgro']
+for company in companies:
+    df = pd.read_csv(company+'_stock_yahoo.csv')
+    data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
 data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
 data.sort_values("date", inplace=True)
