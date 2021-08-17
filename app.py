@@ -13,7 +13,7 @@ data = pd.DataFrame()
 #        df['company'] = i[:-16]
 #        data = pd.concat([data, df], axis = 0)
 #data = data.reset_index(drop = True)
-companies = ['amazon', 'singtel', 'starhub', 'keppel', 'singaporeairlines', 'genting', 'comfortdelgro']
+companies = ['amazon', 'singtel', 'starhub', 'keppel', 'singaporeairlines', 'genting']
 for company in companies:
     df = pd.read_csv(company+'_stock_yahoo.csv')
     df['company'] = company
