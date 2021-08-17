@@ -17,6 +17,7 @@ companies = ['amazon', 'singtel', 'starhub', 'keppel', 'singaporeairlines', 'gen
 for company in companies:
     df = pd.read_csv(company+'_stock_yahoo.csv')
     df['company'] = company
+    df['normalised'] = df['close'].apply(lambda x: x/df['close'][0])
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
 data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
@@ -120,7 +121,6 @@ def updateCharts(company, start_date, end_date):
         & (data.date <= end_date)
     )
     filteredData = data.loc[mask, :]
-    filteredData['normalised'] = filteredData['close'].apply(lambda x: x/filteredData['close'][0])
     closeChartFigure = {
         "data": [
             {
@@ -163,7 +163,7 @@ def updateCharts(company, start_date, end_date):
         },
     }
 
-    return closeChartFigure, openChartFigure
+    return closeChartFigure, normalisedChartFigure
      
 if __name__ == "__main__":
     app.run_server(debug=True)
