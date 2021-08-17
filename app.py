@@ -16,6 +16,7 @@ data = pd.DataFrame()
 companies = ['amazon', 'singtel', 'starhub', 'keppel', 'singaporeiarlines', 'genting', 'comfortdelgro']
 for company in companies:
     df = pd.read_csv(company+'_stock_yahoo.csv')
+    df['company'] = company
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
 data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
