@@ -99,6 +99,12 @@ app.layout = html.Div(
                     ),
                     className="card",
                 ),
+                html.Div(
+                    children=dcc.Graph(
+                        id="histogram-chart", config={"displayModeBar": False},
+                    ),
+                    className="card",
+                ),
             ],
             className="wrapper",
         ),
@@ -106,7 +112,7 @@ app.layout = html.Div(
 )
 
 @app.callback(
-    [Output("close-chart", "figure"), Output("normalised-chart", "figure")],
+    [Output("close-chart", "figure"), Output("normalised-chart", "figure"), Output("histogram-chart", "figure")],
     [
         Input("company-filter", "value"),
         Input("date-range", "start_date"),
@@ -162,8 +168,26 @@ def updateCharts(company, start_date, end_date):
             "colorway": ["#E12D39"],
         },
     }
+    
+    histogramChartFigure = {
+        "data": [
+            {
+                "x": filteredData["close"],
+                "type": "histogram",
+            },
+        ],
+        "layout": {
+            "title": {
+                "text": "Distribution of Close Price",
+                "x": 0.05,
+                "xanchor": "left",
+            },
+            "xaxis": {"fixedrange": True},
+            "colorway": ["#2CA02C"], #https://plotly.com/python/discrete-color/
+        },
+    }
 
-    return closeChartFigure, normalisedChartFigure
+    return closeChartFigure, normalisedChartFigure, histogramChartFigure
      
 if __name__ == "__main__":
     app.run_server(debug=True)
