@@ -94,7 +94,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     children=dcc.Graph(
-                        id="open-chart", config={"displayModeBar": False},
+                        id="normalised-chart", config={"displayModeBar": False},
                     ),
                     className="card",
                 ),
@@ -105,7 +105,7 @@ app.layout = html.Div(
 )
 
 @app.callback(
-    [Output("close-chart", "figure"), Output("open-chart", "figure")],
+    [Output("close-chart", "figure"), Output("normalised-chart", "figure")],
     [
         Input("company-filter", "value"),
         Input("date-range", "start_date"),
@@ -120,6 +120,7 @@ def updateCharts(company, start_date, end_date):
         & (data.date <= end_date)
     )
     filteredData = data.loc[mask, :]
+    filteredData['normalised'] = filteredData['close'].apply(lambda x: x/filteredData['close'][0])
     closeChartFigure = {
         "data": [
             {
@@ -141,18 +142,18 @@ def updateCharts(company, start_date, end_date):
         },
     }
     
-    openChartFigure = {
+    normalisedChartFigure = {
         "data": [
             {
                 "x": filteredData["date"],
-                "y": filteredData["open"],
+                "y": filteredData["normalised"],
                 "type": "lines",
                 "hovertemplate": "$%{y:.2f}<extra></extra>",
             },
         ],
         "layout": {
             "title": {
-                "text": "Open Price",
+                "text": "Normalised Price",
                 "x": 0.05,
                 "xanchor": "left",
             },
