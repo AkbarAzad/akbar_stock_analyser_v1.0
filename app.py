@@ -106,6 +106,12 @@ app.layout = html.Div(
                     ),
                     className="card",
                 ),
+                html.Div(
+                    children=dcc.Graph(
+                        id="returns-chart", config={"displayModeBar": False},
+                    ),
+                    className="card",
+                ),
             ],
             className="wrapper",
         ),
@@ -113,7 +119,7 @@ app.layout = html.Div(
 )
 
 @app.callback(
-    [Output("close-chart", "figure"), Output("normalised-chart", "figure"), Output("histogram-chart", "figure")],
+    [Output("close-chart", "figure"), Output("normalised-chart", "figure"), Output("histogram-chart", "figure"), Output("returns-chart", "figure")],
     [
         Input("company-filter", "value"),
         Input("date-range", "start_date"),
@@ -195,8 +201,29 @@ def updateCharts(company, start_date, end_date):
         yaxis_title_text="Count",
         bargap=0.2
     )
+    
+    returnsChartFigure = {
+        "data": [
+            {
+                "x": filteredData["date"],
+                "y": filteredData["returns"],
+                "type": "lines",
+                "hovertemplate": "%{y:.2f}%<extra></extra>",
+            },
+        ],
+        "layout": {
+            "title": {
+                "text": "Daily Returns",
+                "x": 0.05,
+                "xanchor": "left",
+            },
+            "xaxis": {"fixedrange": True},
+            "yaxis": {"tickprefix": "$", "fixedrange": True},
+            "colorway": ["#990099"],
+        },
+    }
 
-    return closeChartFigure, normalisedChartFigure, histogramChartFigure
+    return closeChartFigure, normalisedChartFigure, histogramChartFigure, returnsChartFigure
      
 if __name__ == "__main__":
     app.run_server(debug=True)
