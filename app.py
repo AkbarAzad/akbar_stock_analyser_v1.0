@@ -21,8 +21,9 @@ for company in companies:
     df['normalised'] = df['close'].apply(lambda x: x/df['close'][0])
     closeList = df["close"].tolist()
     lagCloseList = closeList[:-1]
-    lagCloseList.insert(0, None)
+    lagCloseList.insert(0, 1)
     returnsList = [((x-y)/y)*100 for (x, y) in zip(closeList, lagCloseList)]
+    returnsList[0] = 0
     df['returns'] = returnsList
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
