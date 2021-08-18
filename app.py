@@ -8,6 +8,7 @@ from dash.dependencies import Output, Input
 import plotly.express as px
 
 data = pd.DataFrame()
+dataMA = pd.DataFrame()
 #for i in os.listdir():
 #    if '_stock_yahoo.csv' in i:
 #        df = pd.read_csv(i)
@@ -19,12 +20,16 @@ for company in companies:
     df = pd.read_csv(company+'_stock_yahoo.csv')
     df['company'] = company
     df['normalised'] = df['close'].apply(lambda x: x/df['close'][0])
+    df.dropna(subset=['close'], inplace=True)
     closeList = df["close"].tolist()
     lagCloseList = closeList[:-1]
     lagCloseList.insert(0, 1)
     returnsList = [((x-y)/y)*100 for (x, y) in zip(closeList, lagCloseList)]
     returnsList[0] = 0
     df['returns'] = returnsList
+    df["date"] = pd.to_datetime(df["date"], format = "%Y-%m-%d")
+    df.sort_values("date", ascending = True, inplace=True)
+    df['ma'] = df['close'].rolling(21).mean()
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
 data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
@@ -118,6 +123,12 @@ app.layout = html.Div(
                     ),
                     className="card",
                 ),
+                html.Div(
+                    children=dcc.Graph(
+                        id="ma-chart", config={"displayModeBar": False},
+                    ),
+                    className="card",
+                ),
             ],
             className="wrapper",
         ),
@@ -125,7 +136,7 @@ app.layout = html.Div(
 )
 
 @app.callback(
-    [Output("close-chart", "figure"), Output("normalised-chart", "figure"), Output("histogram-chart", "figure"), Output("returns-chart", "figure")],
+    [Output("close-chart", "figure"), Output("normalised-chart", "figure"), Output("histogram-chart", "figure"), Output("returns-chart", "figure"), Output("ma-chart", "figure")],
     [
         Input("company-filter", "value"),
         Input("date-range", "start_date"),
@@ -228,8 +239,11 @@ def updateCharts(company, start_date, end_date):
             "colorway": ["#990099"],
         },
     }
+    
+    maChartFigure = px.line(x = filteredData['date'], y = filteredData['close'], title = ' Original Stock Price vs. 21-days Moving Average change')
+    maChartFigure.add_scatter(x = filteredData['date'], y = filteredData['ma'], name = '21-days moving average')
 
-    return closeChartFigure, normalisedChartFigure, histogramChartFigure, returnsChartFigure
+    return closeChartFigure, normalisedChartFigure, histogramChartFigure, returnsChartFigure, maChartFigure
      
 if __name__ == "__main__":
     app.run_server(debug=True)
