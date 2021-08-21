@@ -52,7 +52,7 @@ for company in companies:
     for i in predicted_prices: # Store predictions in list
         predicted.append(i[0])
     close = [] # Store scaled close prices in list
-    for i in price_volume_target_scaled_df:
+    for i in dfScaled:
         close.append(i[0])
     df['closeScaled'] = close
     df['closePredicted'] = predicted
