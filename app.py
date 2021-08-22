@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np
 from dash.dependencies import Output, Input
 import plotly.express as px
-#from sklearn.preprocessing import MinMaxScaler
-#from sklearn.linear_model import Ridge
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import Ridge
 
 data = pd.DataFrame()
 dataMA = pd.DataFrame()
@@ -33,29 +33,29 @@ for company in companies:
     df.sort_values("date", ascending = True, inplace=True)
     df['ma'] = df['close'].rolling(21).mean()
     n = 1
-    #df['target'] = df[['close']].shift(-n) # Create target variable for prediction
+    df['target'] = df[['close']].shift(-n) # Create target variable for prediction
     df = df.iloc[:-1] # Remove last row due to NULL value in target
-    #sc = MinMaxScaler(feature_range = (0,1))
-    #dfScaled = sc.fit_transform(df[['close', 'volume', 'target']]) # keep close, volume, target
+    sc = MinMaxScaler(feature_range = (0,1))
+    dfScaled = sc.fit_transform(df[['close', 'volume', 'target']]) # keep close, volume, target
     # Create Feature and Target
-   # X = dfScaled[:, :2]
-    #Y = dfScaled[:,2:]
+    X = dfScaled[:, :2]
+    Y = dfScaled[:,2:]
     # Split into train and test sets
-  #  split = int(0.65 * len(X))
-    #X_train, Y_train, X_test, Y_test = X[:split], Y[:split], X[split:], Y[split:] 
-    #regression_model = Ridge() # Create ridge regression model
-    #regression_model.fit(X_train, Y_train)
-   # lr_accuracy = regression_model.score(X_test, Y_test) # Model evaluation
-    #df['accuracy'] = lr_accuracy
-   # predicted_prices = regression_model.predict(X) # Make predictions
+    split = int(0.65 * len(X))
+    X_train, Y_train, X_test, Y_test = X[:split], Y[:split], X[split:], Y[split:] 
+    regression_model = Ridge() # Create ridge regression model
+    regression_model.fit(X_train, Y_train)
+    lr_accuracy = regression_model.score(X_test, Y_test) # Model evaluation
+    df['accuracy'] = lr_accuracy
+    predicted_prices = regression_model.predict(X) # Make predictions
     predicted = []
-  #  for i in predicted_prices: # Store predictions in list
-   #     predicted.append(i[0])
+    for i in predicted_prices: # Store predictions in list
+        predicted.append(i[0])
     close = [] # Store scaled close prices in list
- #   for i in dfScaled:
-  #      close.append(i[0])
-    #df['closeScaled'] = close
-    #df['closePredicted'] = predicted
+    for i in dfScaled:
+        close.append(i[0])
+    df['closeScaled'] = close
+    df['closePredicted'] = predicted
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
 data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
@@ -275,8 +275,8 @@ def updateCharts(company, start_date, end_date):
     maChartFigure = px.line(x = filteredData['date'], y = filteredData['close'], title = ' Original Stock Price vs. 21-days Moving Average change')
     maChartFigure.add_scatter(x = filteredData['date'], y = filteredData['ma'], name = '21-days moving average')
     
-    ridgeChartFigure = px.line(x = filteredData['date'], y = filteredData['close'], title = "Original Scaled Close Price vs Prediction")
-    ridgeChartFigure.add_scatter(x = filteredData['date'], y = filteredData['ma'], name = 'Predictions')
+    ridgeChartFigure = px.line(x = filteredData['date'], y = filteredData['closeScaled'], title = f"Original Scaled Close Price vs Prediction with Accuracy {df['accuracy'][0]}")
+    ridgeChartFigure.add_scatter(x = filteredData['date'], y = filteredData['closePredicted'], name = 'Predictions')
 
     return closeChartFigure, normalisedChartFigure, histogramChartFigure, returnsChartFigure, maChartFigure, ridgeChartFigure
      
