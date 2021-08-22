@@ -55,7 +55,7 @@ for company in companies:
     for i in dfScaled:
         close.append(i[0])
     df['closeScaled'] = close
-    df['closePredicted'] = predicted
+    #df['closePredicted'] = predicted
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
 data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
