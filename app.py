@@ -36,24 +36,24 @@ for company in companies:
     #df['target'] = df[['close']].shift(-n) # Create target variable for prediction
     df = df.iloc[:-1] # Remove last row due to NULL value in target
     sc = MinMaxScaler(feature_range = (0,1))
-    dfScaled = sc.fit_transform(df[['close', 'volume', 'target']]) # keep close, volume, target
+    #dfScaled = sc.fit_transform(df[['close', 'volume', 'target']]) # keep close, volume, target
     # Create Feature and Target
-    X = dfScaled[:, :2]
-    Y = dfScaled[:,2:]
+   # X = dfScaled[:, :2]
+    #Y = dfScaled[:,2:]
     # Split into train and test sets
-    split = int(0.65 * len(X))
-    X_train, Y_train, X_test, Y_test = X[:split], Y[:split], X[split:], Y[split:] 
+  #  split = int(0.65 * len(X))
+    #X_train, Y_train, X_test, Y_test = X[:split], Y[:split], X[split:], Y[split:] 
     regression_model = Ridge() # Create ridge regression model
-    regression_model.fit(X_train, Y_train)
-    lr_accuracy = regression_model.score(X_test, Y_test) # Model evaluation
+    #regression_model.fit(X_train, Y_train)
+   # lr_accuracy = regression_model.score(X_test, Y_test) # Model evaluation
     #df['accuracy'] = lr_accuracy
-    predicted_prices = regression_model.predict(X) # Make predictions
+   # predicted_prices = regression_model.predict(X) # Make predictions
     predicted = []
-    for i in predicted_prices: # Store predictions in list
-        predicted.append(i[0])
+  #  for i in predicted_prices: # Store predictions in list
+   #     predicted.append(i[0])
     close = [] # Store scaled close prices in list
-    for i in dfScaled:
-        close.append(i[0])
+ #   for i in dfScaled:
+  #      close.append(i[0])
     #df['closeScaled'] = close
     #df['closePredicted'] = predicted
     data = pd.concat([data, df], axis = 0)
