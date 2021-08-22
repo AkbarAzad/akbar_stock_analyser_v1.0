@@ -46,7 +46,7 @@ for company in companies:
     regression_model = Ridge() # Create ridge regression model
     regression_model.fit(X_train, Y_train)
     lr_accuracy = regression_model.score(X_test, Y_test) # Model evaluation
-    df['accuracy'] = lr_accuracy
+    #df['accuracy'] = lr_accuracy
     predicted_prices = regression_model.predict(X) # Make predictions
     predicted = []
     for i in predicted_prices: # Store predictions in list
