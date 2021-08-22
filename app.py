@@ -33,7 +33,7 @@ for company in companies:
     df.sort_values("date", ascending = True, inplace=True)
     df['ma'] = df['close'].rolling(21).mean()
     n = 1
-    df['target'] = df[['close']].shift(-n) # Create target variable for prediction
+    #df['target'] = df[['close']].shift(-n) # Create target variable for prediction
     df = df.iloc[:-1] # Remove last row due to NULL value in target
     sc = MinMaxScaler(feature_range = (0,1))
     dfScaled = sc.fit_transform(df[['close', 'volume', 'target']]) # keep close, volume, target
