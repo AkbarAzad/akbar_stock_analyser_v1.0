@@ -54,7 +54,7 @@ for company in companies:
     close = [] # Store scaled close prices in list
     for i in dfScaled:
         close.append(i[0])
-    df['closeScaled'] = close
+    #df['closeScaled'] = close
     #df['closePredicted'] = predicted
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
