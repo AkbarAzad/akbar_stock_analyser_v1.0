@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np
 from dash.dependencies import Output, Input
 import plotly.express as px
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.linear_model import Ridge
+#from sklearn.preprocessing import MinMaxScaler
+#from sklearn.linear_model import Ridge
 
 data = pd.DataFrame()
 dataMA = pd.DataFrame()
@@ -35,7 +35,7 @@ for company in companies:
     n = 1
     #df['target'] = df[['close']].shift(-n) # Create target variable for prediction
     df = df.iloc[:-1] # Remove last row due to NULL value in target
-    sc = MinMaxScaler(feature_range = (0,1))
+    #sc = MinMaxScaler(feature_range = (0,1))
     #dfScaled = sc.fit_transform(df[['close', 'volume', 'target']]) # keep close, volume, target
     # Create Feature and Target
    # X = dfScaled[:, :2]
@@ -43,7 +43,7 @@ for company in companies:
     # Split into train and test sets
   #  split = int(0.65 * len(X))
     #X_train, Y_train, X_test, Y_test = X[:split], Y[:split], X[split:], Y[split:] 
-    regression_model = Ridge() # Create ridge regression model
+    #regression_model = Ridge() # Create ridge regression model
     #regression_model.fit(X_train, Y_train)
    # lr_accuracy = regression_model.score(X_test, Y_test) # Model evaluation
     #df['accuracy'] = lr_accuracy
