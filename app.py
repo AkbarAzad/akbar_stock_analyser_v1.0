@@ -75,9 +75,9 @@ app.title = "Akbar Analytics: Understand Your Stocks!"
 app.layout = html.Div(
     children = [html.Img(children='chendol', src='chendol.png', style={'height':'10%', 'width':'10%'}),
         html.Div(
-            children=[
+            children=[html.P(children='📈', className='header-emoji'),
                 html.H1(
-                    children="📈 Akbar Analytics",
+                    children="Akbar Analytics",
                     className="header-title",
                 ),
                 html.P(
