@@ -11,7 +11,7 @@ from sklearn.linear_model import Ridge
 import base64
 
 image_filename = 'chendol.png' # replace with your own image
-encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode('ascii')
 
 data = pd.DataFrame()
 dataMA = pd.DataFrame()
@@ -80,7 +80,7 @@ app.layout = html.Div(
     children = [
         html.Div(
             children=[
-                html.Img(children='chendol', src='data:image/png;base64,{}'.format(encoded_image), style={'height':'10%', 'width':'10%'}),
+                html.Img(children='chendol', src=app.get_asset_url('chendol.png'), style={'height':'10%', 'width':'10%'}),
                 html.P(children='📈', className='header-emoji'),
                 html.H1(
                     children="Akbar Analytics",
