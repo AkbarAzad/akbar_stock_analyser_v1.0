@@ -249,7 +249,7 @@ def updateCharts(company, start_date, end_date):
     #    },
     #}
     
-    histogramChartFigure = px.histogram(filteredData["close"])
+    histogramChartFigure = px.histogram(filteredData["close"], template = "simple-white")
     histogramChartFigure.update_layout(
         title_text="Distribution of Close Price",
         xaxis_title_text="Close",
@@ -278,11 +278,11 @@ def updateCharts(company, start_date, end_date):
         },
     }
     
-    maChartFigure = px.line(x = filteredData['date'], y = filteredData['close'], title = ' Original Stock Price vs. 21-days Moving Average change')
+    maChartFigure = px.line(x = filteredData['date'], y = filteredData['close'], title = ' Original Stock Price vs. 21-days Moving Average change', template = "simple_white")
     maChartFigure.add_scatter(x = filteredData['date'], y = filteredData['ma'], name = '21-days moving average')
     
     
-    ridgeChartFigure = px.line(x = filteredData['date'], y = filteredData['closeScaled'], title = f"Original Scaled Close Price vs Prediction with Accuracy {min(filteredData['accuracy'])}")
+    ridgeChartFigure = px.line(x = filteredData['date'], y = filteredData['closeScaled'], title = f"Original Scaled Close Price vs Prediction with Accuracy {min(filteredData['accuracy'])}", template = "simple_white")
     ridgeChartFigure.add_scatter(x = filteredData['date'], y = filteredData['closePredicted'], name = 'Predictions')
 
     return closeChartFigure, normalisedChartFigure, histogramChartFigure, returnsChartFigure, maChartFigure, ridgeChartFigure
