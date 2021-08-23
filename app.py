@@ -8,6 +8,10 @@ from dash.dependencies import Output, Input
 import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import Ridge
+import base64
+
+image_filename = 'chendol.png' # replace with your own image
+encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 data = pd.DataFrame()
 dataMA = pd.DataFrame()
@@ -73,9 +77,11 @@ app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 server = app.server
 app.title = "Akbar Analytics: Understand Your Stocks!"
 app.layout = html.Div(
-    children = [html.Img(children='chendol', src='chendol.png', style={'height':'10%', 'width':'10%'}),
+    children = [
         html.Div(
-            children=[html.P(children='📈', className='header-emoji'),
+            children=[
+                html.Img(children='chendol', src='data:image/png;base64,{}'.format(encoded_image), style={'height':'10%', 'width':'10%'}),
+                html.P(children='📈', className='header-emoji'),
                 html.H1(
                     children="Akbar Analytics",
                     className="header-title",
