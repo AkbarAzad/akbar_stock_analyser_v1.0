@@ -210,26 +210,36 @@ def updateCharts(company, start_date, end_date):
         },
     }
     
-    normalisedChartFigure = {
-        "data": [
-            {
-                "x": filteredData["date"],
-                "y": filteredData["normalised"],
-                "type": "lines",
-                "hovertemplate": "$%{y:.2f}<extra></extra>",
-            },
-        ],
-        "layout": {
-            "title": {
-                "text": "Normalised Price",
-                "x": 0.05,
-                "xanchor": "left",
-            },
-            "xaxis": {"fixedrange": True},
-            "yaxis": {"tickprefix": "$", "fixedrange": True},
-            "colorway": ["#E12D39"],
-        },
-    }
+   # normalisedChartFigure = {
+   #     "data": [
+   #         {
+   #             "x": filteredData["date"],
+   #             "y": filteredData["normalised"],
+   #             "type": "lines",
+   #             "hovertemplate": "$%{y:.2f}<extra></extra>",
+   #         },
+   #     ],
+   #     "layout": {
+   #         "title": {
+   #             "text": "Normalised Price",
+   #             "x": 0.05,
+   #             "xanchor": "left",
+   #         },
+   #         "xaxis": {"fixedrange": True},
+   #         "yaxis": {"tickprefix": "$", "fixedrange": True},
+   #         "colorway": ["#E12D39"],
+   #     },
+   # }
+    
+    normalisedChartFigure = px.line(data, title = "Normalised Price")
+    for i in companies:
+        dataI = 
+        maskI = (
+        (data.date >= start_date)
+        & (data.date <= end_date)
+        )
+        dataI = data.loc[maskI, :]
+        normalisedChartFigure.add_scatter(x = dataI['date'], y = dataI['normalised'], name = i)
     
     #histogramChartFigure = {
     #    "data": [
