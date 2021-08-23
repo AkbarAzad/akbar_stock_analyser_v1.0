@@ -78,4 +78,7 @@ body {
 .avatar {
 	border-radius: 100%;
 	width: 48px;
+	font-size: 48px;
+    margin: 0 auto;
+    text-align: center;
 }
