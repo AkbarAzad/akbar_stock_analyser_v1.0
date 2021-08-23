@@ -80,7 +80,7 @@ app.layout = html.Div(
     children = [
         html.Div(
             children=[
-                html.Img(src='data:image/png;base64,{}'.format(encoded_image), style={'height':'10%', 'width':'10%'}),
+                html.Img(src='data:image/png;base64,{}'.format(encoded_image), style={'height':'300px', 'width':'400px'}),
                 html.P(children='📈', className='header-emoji'),
                 html.H1(
                     children="Akbar Analytics",
