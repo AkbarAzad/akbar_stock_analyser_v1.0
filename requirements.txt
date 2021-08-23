@@ -7,3 +7,4 @@ scikit-learn
 gunicorn
 dash
 plotly
+pybase64
