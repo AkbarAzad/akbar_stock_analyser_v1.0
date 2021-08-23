@@ -82,9 +82,9 @@ app.layout = html.Div(
             children=[
                 html.P(children='📈', className='header-emoji'),
                 html.H1(
-                    children=[html.Img(src='data:image/png;base64,{}'.format(encoded_image), className='avatar'),
+                    children=
                         html.H1(children="Akbar Analytics",
-                    className="header-title"),]
+                    className="header-title"),
                 ),
                 html.P(
                     children = "Analyse selected stock data"
