@@ -232,14 +232,17 @@ def updateCharts(company, start_date, end_date):
    # }
     
     normalisedChartFigure = px.line(title = "Normalised Price", template = "simple_white")
-    for i in companies:
-        dataI = 
-        maskI = (
+    mask2 = (
         (data.date >= start_date)
         & (data.date <= end_date)
         )
-        dataI = data.loc[maskI, :]
-        normalisedChartFigure.add_scatter(x = dataI['date'], y = dataI['normalised'], name = i)
+    filteredData2 = data.loc[mask2, :]
+    for i in companies:
+        maskI = (
+        (filteredData2.company == i)
+        )
+        filteredDataI = filteredData2.loc[maskI, :]
+        normalisedChartFigure.add_scatter(x = filteredDataI['date'], y = filteredDataI['normalised'], name = i)
     
     #histogramChartFigure = {
     #    "data": [
