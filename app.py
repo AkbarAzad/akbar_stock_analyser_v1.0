@@ -10,8 +10,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import Ridge
 import base64
 
-image_filename = 'chendol.png' # replace with your own image
-encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode('ascii')
+#image_filename = 'chendol.png' # replace with your own image
+#encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode('ascii')
 
 data = pd.DataFrame()
 dataMA = pd.DataFrame()
@@ -249,7 +249,7 @@ def updateCharts(company, start_date, end_date):
     #    },
     #}
     
-    histogramChartFigure = px.histogram(filteredData["close"], template = "simple-white")
+    histogramChartFigure = px.histogram(filteredData["close"], template = "simple_white")
     histogramChartFigure.update_layout(
         title_text="Distribution of Close Price",
         xaxis_title_text="Close",
