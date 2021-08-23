@@ -1,7 +1,7 @@
 body {
     font-family: "Lato", sans-serif;
     margin: 0;
-    background-color: #F7F7F7;
+    background-color: #191970;
 }
 
 .header {
@@ -73,12 +73,4 @@ body {
     margin-bottom: 6px;
     font-weight: bold;
     color: #079A82;
-}
-
-.avatar {
-	border-radius: 100%;
-	width: 48px;
-	font-size: 48px;
-    margin: 0 auto;
-    text-align: center;
 }
