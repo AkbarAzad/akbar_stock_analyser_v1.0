@@ -231,7 +231,7 @@ def updateCharts(company, start_date, end_date):
    #     },
    # }
     
-    normalisedChartFigure = px.line(data, title = "Normalised Price")
+    normalisedChartFigure = px.line(data, title = "Normalised Price", template = "simple_white")
     for i in companies:
         dataI = 
         maskI = (
