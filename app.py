@@ -73,11 +73,11 @@ app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 server = app.server
 app.title = "Akbar Analytics: Understand Your Stocks!"
 app.layout = html.Div(
-    children = [html.P(children="🇸🇬", className="header-emoji"),
+    children = [html.Img(src='chendol.png', className="header-emoji"),
         html.Div(
             children=[
                 html.H1(
-                    children="Akbar Analytics",
+                    children="🇸🇬 Akbar Analytics",
                     className="header-title",
                 ),
                 html.P(
