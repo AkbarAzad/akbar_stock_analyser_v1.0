@@ -9,6 +9,8 @@ import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import Ridge
 import base64
+import sqlite3
+from sqlalchemy import create_engine
 
 #image_filename = 'chendol.png' # replace with your own image
 #encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode('ascii')
@@ -21,10 +23,12 @@ dataMA = pd.DataFrame()
 #        df['company'] = i[:-16]
 #        data = pd.concat([data, df], axis = 0)
 #data = data.reset_index(drop = True)
-companies = ['amazon', 'singtel', 'starhub', 'keppel', 'singaporeairlines', 'genting']
-for company in companies:
-    df = pd.read_csv(company+'_stock_yahoo.csv')
-    df['company'] = company
+engine = create_engine('sqlite:///C:/Users/65961/akbar-airflow/dags/airflow_db.sqlite')
+dfSQL = pd.read_sql_query('SELECT * FROM airflow_db', engine)
+companies = {'AMZN': 'amazon', 'TSLA': 'tesla', 'GOOG': 'google', 'AAPL': 'apple', 'MSFT': 'microsoft'}
+dfSQL['company'] = dfSQL['ticker'].map(companies)
+for company in list(dfSQL['company'].unique()):
+    df = dfSQL[dfSQL['company'] == company]
     df['normalised'] = df['close'].apply(lambda x: x/df['close'][0])
     df.dropna(subset=['close'], inplace=True)
     closeList = df["close"].tolist()
@@ -286,7 +290,7 @@ def updateCharts(company, start_date, end_date):
                 "xanchor": "left",
             },
             "xaxis": {"fixedrange": True},
-            "yaxis": {"tickprefix": "$", "fixedrange": True},
+            "yaxis": {"tickprefix": "%", "fixedrange": True},
             "colorway": ["#990099"],
         },
     }
