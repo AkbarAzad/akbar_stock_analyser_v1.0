@@ -8,3 +8,5 @@ gunicorn
 dash
 plotly
 pybase64
+sqlite3
+sqlalchemy
