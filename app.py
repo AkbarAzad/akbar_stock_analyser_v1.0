@@ -25,7 +25,7 @@ dataMA = pd.DataFrame()
 #data = data.reset_index(drop = True)
 #engine = create_engine('sqlite:///C:/Users/65961/akbar-airflow/dags/airflow_db.sqlite')
 #dfSQL = pd.read_sql_query('SELECT * FROM airflow_db', engine)
-dfSQL = pd.read_csv('C:/Users/65961/akbar-airflow/dags/airflow_db.csv')
+dfSQL = pd.read_csv('C://Users//65961//akbar-airflow//dags//airflow_db.csv')
 companies = {'AMZN': 'amazon', 'TSLA': 'tesla', 'GOOG': 'google', 'AAPL': 'apple', 'MSFT': 'microsoft'}
 dfSQL['company'] = dfSQL['ticker'].map(companies)
 for company in list(dfSQL['company'].unique()):
