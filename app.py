@@ -9,8 +9,8 @@ import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import Ridge
 import base64
-import sqlite3
-from sqlalchemy import create_engine
+#import sqlite3
+#from sqlalchemy import create_engine
 
 #image_filename = 'chendol.png' # replace with your own image
 #encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode('ascii')
@@ -23,8 +23,9 @@ dataMA = pd.DataFrame()
 #        df['company'] = i[:-16]
 #        data = pd.concat([data, df], axis = 0)
 #data = data.reset_index(drop = True)
-engine = create_engine('sqlite:///C:/Users/65961/akbar-airflow/dags/airflow_db.sqlite')
-dfSQL = pd.read_sql_query('SELECT * FROM airflow_db', engine)
+#engine = create_engine('sqlite:///C:/Users/65961/akbar-airflow/dags/airflow_db.sqlite')
+#dfSQL = pd.read_sql_query('SELECT * FROM airflow_db', engine)
+dfSQL = pd.read_csv('C:/Users/65961/akbar-airflow/dags/airflow_db.csv')
 companies = {'AMZN': 'amazon', 'TSLA': 'tesla', 'GOOG': 'google', 'AAPL': 'apple', 'MSFT': 'microsoft'}
 dfSQL['company'] = dfSQL['ticker'].map(companies)
 for company in list(dfSQL['company'].unique()):
