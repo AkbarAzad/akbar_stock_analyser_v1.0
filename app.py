@@ -12,6 +12,10 @@ import base64
 #import sqlite3
 #from sqlalchemy import create_engine
 
+# Test function
+def calculateSum(a, b):
+    return a+b
+
 #image_filename = 'chendol.png' # replace with your own image
 #encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode('ascii')
 
