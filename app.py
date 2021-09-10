@@ -116,7 +116,7 @@ app.layout = html.Div(
                                 {"label": company, "value": company}
                                 for company in np.sort(data.company.unique())
                             ],
-                            value = "singtel",
+                            value = "amazon",
                         clearable = False,
                         className = "dropdown",
                         ),
