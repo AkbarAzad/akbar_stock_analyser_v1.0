@@ -34,8 +34,9 @@ companies = {'AMZN': 'amazon', 'TSLA': 'tesla', 'GOOG': 'google', 'AAPL': 'apple
 dfSQL['company'] = dfSQL['ticker'].map(companies)
 for company in list(dfSQL['company'].unique()):
     df = dfSQL[dfSQL['company'] == company]
+    firstClose = df['close'][0]
     df = df.copy()
-    df['normalised'] = df['close'].apply(lambda x: x/df['close'][0])
+    df['normalised'] = df['close'].apply(lambda x: x/firstClose)
     df.dropna(subset=['close'], inplace=True)
     closeList = df["close"].tolist()
     lagCloseList = closeList[:-1]
