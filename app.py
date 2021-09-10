@@ -34,7 +34,7 @@ companies = {'AMZN': 'amazon', 'TSLA': 'tesla', 'GOOG': 'google', 'AAPL': 'apple
 dfSQL['company'] = dfSQL['ticker'].map(companies)
 for company in list(dfSQL['company'].unique()):
     df = dfSQL[dfSQL['company'] == company]
-    firstClose = df['close'][0]
+    firstClose = df['close'].iloc[0]
     df = df.copy()
     df['normalised'] = df['close'].apply(lambda x: x/firstClose)
     df.dropna(subset=['close'], inplace=True)
