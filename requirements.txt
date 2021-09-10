@@ -9,4 +9,4 @@ dash
 plotly
 pybase64
 fsspec
-unittest
+unittest2
