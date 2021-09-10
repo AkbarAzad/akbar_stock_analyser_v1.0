@@ -1,6 +1,6 @@
 language: python
 python:
-#<<<<<<< HEAD
+<<<<<<< HEAD
 - '3.6'
 install:
 - pip install -r requirements.txt
@@ -8,8 +8,8 @@ script:
 - python app_test.py
 deploy:
   api_key:
-    secure: u3VwylYcouPIRLNPltB5FaVOiMjPAkcN+Heb6vfhSrPFwlO3bbV1mLXfQd/0HBVhXaBuFk5KbyDCki7i09Nl4UOxfRLrXDHXcPvPMAXaDLwQe0nvJzzmxJ2gH7lB/VjeChbBxlBTQnCA9udo+XXyv0f741oR4p6lRo+VUTyS/Fo56oQcCnulfNFtiQc4noLD7Aot5lnYX6XYoPQUTUzeeWXPPBev3M2Kpwhb+A4KatXr3OgnbosBXwB3/6iv3C4p1xglKm8sFU+wu6ef+dnR2c7iYfth1wpkAgtHMjg07ZbnUuKydavIqDnXp3te2ZmCT4/49IJrBR8s8HtwBhGrtkZQJ9jjgo3Cogl4SLHEr3lVoEMjAX0lxqDaKzKSEdmBzz5ZaM0NxvXVMuOl5l/z2MO8gkMJ0YBa7vCh8dYTrTCRBmuRYl8KnPYf55RvzOaM3l4RBIrJ2/0DLXvgC/2YmqtxIeghdJ7yk6F1Y8hzumvk52pFWD2/CoO4ezDuiYXh0dXTydM18r79eEl+WaAAKrUZXbjZ27Uhpr/9y/zOjr0jrirGS7Z5QDgqvQT7SoRu1wUfR0dCUhU00iKxCYf9xUlRN94fT5o42FqLL/WDjV055ybTyTcppU8mS5mD7zkIlGvi7eBi3hkBuRVqEZ6zRR+3dq+VoNSqP3LEwqxViN0 #=
-#=======
+    secure: u3VwylYcouPIRLNPltB5FaVOiMjPAkcN+Heb6vfhSrPFwlO3bbV1mLXfQd/0HBVhXaBuFk5KbyDCki7i09Nl4UOxfRLrXDHXcPvPMAXaDLwQe0nvJzzmxJ2gH7lB/VjeChbBxlBTQnCA9udo+XXyv0f741oR4p6lRo+VUTyS/Fo56oQcCnulfNFtiQc4noLD7Aot5lnYX6XYoPQUTUzeeWXPPBev3M2Kpwhb+A4KatXr3OgnbosBXwB3/6iv3C4p1xglKm8sFU+wu6ef+dnR2c7iYfth1wpkAgtHMjg07ZbnUuKydavIqDnXp3te2ZmCT4/49IJrBR8s8HtwBhGrtkZQJ9jjgo3Cogl4SLHEr3lVoEMjAX0lxqDaKzKSEdmBzz5ZaM0NxvXVMuOl5l/z2MO8gkMJ0YBa7vCh8dYTrTCRBmuRYl8KnPYf55RvzOaM3l4RBIrJ2/0DLXvgC/2YmqtxIeghdJ7yk6F1Y8hzumvk52pFWD2/CoO4ezDuiYXh0dXTydM18r79eEl+WaAAKrUZXbjZ27Uhpr/9y/zOjr0jrirGS7Z5QDgqvQT7SoRu1wUfR0dCUhU00iKxCYf9xUlRN94fT5o42FqLL/WDjV055ybTyTcppU8mS5mD7zkIlGvi7eBi3hkBuRVqEZ6zRR+3dq+VoNSqP3LEwqxViN0=
+=======
     - "3.6"
 # command to install dependencies
 install:
@@ -17,4 +17,4 @@ install:
 # command to run tests
 script: 
     - python app_test.py
-#>>>>>>> 0f871c7b4a87710fade838ff481300d8efbad838
+>>>>>>> 0f871c7b4a87710fade838ff481300d8efbad838
