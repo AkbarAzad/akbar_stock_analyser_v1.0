@@ -12,6 +12,10 @@ import base64
 #import sqlite3
 #from sqlalchemy import create_engine
 
+# Test function
+def calculateSum(a, b):
+    return a+b
+
 #image_filename = 'chendol.png' # replace with your own image
 #encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode('ascii')
 
@@ -25,12 +29,14 @@ dataMA = pd.DataFrame()
 #data = data.reset_index(drop = True)
 #engine = create_engine('sqlite:///C:/Users/65961/akbar-airflow/dags/airflow_db.sqlite')
 #dfSQL = pd.read_sql_query('SELECT * FROM airflow_db', engine)
-dfSQL = pd.read_csv('C://Users//65961//akbar-airflow//dags//airflow_db.csv')
+dfSQL = pd.read_csv('airflow_db.csv')
 companies = {'AMZN': 'amazon', 'TSLA': 'tesla', 'GOOG': 'google', 'AAPL': 'apple', 'MSFT': 'microsoft'}
 dfSQL['company'] = dfSQL['ticker'].map(companies)
 for company in list(dfSQL['company'].unique()):
     df = dfSQL[dfSQL['company'] == company]
-    df['normalised'] = df['close'].apply(lambda x: x/df['close'][0])
+    firstClose = df['close'].iloc[0]
+    df = df.copy()
+    df['normalised'] = df['close'].apply(lambda x: x/firstClose)
     df.dropna(subset=['close'], inplace=True)
     closeList = df["close"].tolist()
     lagCloseList = closeList[:-1]
