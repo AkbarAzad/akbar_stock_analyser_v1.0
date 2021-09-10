@@ -1,9 +1,9 @@
 import unittest
 from app import calculateSum
 
-class myTest:
+class myTest(unittest.TestCase):
 
-    def testFunction(unittest.TestCase):
+    def testFunction():
         self.assertEqual(calculateSum(1,1) 2)
         self.assertEqual(calculateSum(1,-1), 0)
         
