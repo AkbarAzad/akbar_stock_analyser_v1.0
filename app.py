@@ -251,7 +251,7 @@ def updateCharts(company, start_date, end_date):
         & (data.date <= end_date)
         )
     filteredData2 = data.loc[mask2, :]
-    for i in companies:
+    for i in list(filteredData2['company'].unique()):
         maskI = (
         (filteredData2.company == i)
         )
