@@ -9,6 +9,7 @@ import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import Ridge
 import base64
+from datetime import datetime
 #import sqlite3
 #from sqlalchemy import create_engine
 
@@ -30,6 +31,8 @@ dataMA = pd.DataFrame()
 #engine = create_engine('sqlite:///C:/Users/65961/akbar-airflow/dags/airflow_db.sqlite')
 #dfSQL = pd.read_sql_query('SELECT * FROM airflow_db', engine)
 dfSQL = pd.read_csv('airflow_db.csv')
+# Convert to datetime
+dfSQL['date'] = dfSQL['date'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d').date())
 companies = {'AMZN': 'amazon', 'TSLA': 'tesla', 'GOOG': 'google', 'AAPL': 'apple', 'MSFT': 'microsoft'}
 dfSQL['company'] = dfSQL['ticker'].map(companies)
 for company in list(dfSQL['company'].unique()):
