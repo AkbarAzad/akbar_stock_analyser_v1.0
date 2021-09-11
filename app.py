@@ -76,7 +76,7 @@ for company in list(dfSQL['company'].unique()):
     df['closePredicted'] = predicted
     data = pd.concat([data, df], axis = 0)
 data = data.reset_index(drop = True)
-data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
+#data["date"] = pd.to_datetime(data["date"], format = "%Y-%m-%d")
 data.sort_values("date", inplace=True)
 
 external_stylesheets = [
@@ -133,10 +133,10 @@ app.layout = html.Div(
                         ),
                         dcc.DatePickerRange(
                             id="date-range",
-                            min_date_allowed=data.date.min().date(),
-                            max_date_allowed=data.date.max().date(),
-                            start_date=data.date.min().date(),
-                            end_date=data.date.max().date(),
+                            min_date_allowed=data.date.min(),
+                            max_date_allowed=data.date.max(),
+                            start_date=data.date.min(),
+                            end_date=data.date.max(),
                         ),
                     ]
                 ),
